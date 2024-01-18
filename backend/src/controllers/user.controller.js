@@ -7,6 +7,7 @@ const userService= require('../services/user.service')
 const taskService = require('../services/task.service')
 const ErrorResponse = require('../utils/errorResponse')
 const sendPasswordChangeEmail = require('../utils/sendEmail')
+const sendEmailBrevo = require('../utils/sendMailBrevo')
 
 const UserController = {};
 
@@ -52,7 +53,8 @@ UserController.updatePassword = asynchandler(async (req, res) => {
         throw new ErrorResponse('Invalid old password',400);
     }
     user.password=newPassword;
-    sendPasswordChangeEmail('user.email');
+    // sendPasswordChangeEmail(user.email);
+    sendEmailBrevo(user.email,"Password Change Notification","Your Task Manager's Password has been Changed");
     await user.save();
     res.send({user});
 });
