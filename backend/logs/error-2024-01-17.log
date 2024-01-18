@@ -1,0 +1,3 @@
+{"level":"info","message":"new User registered"}
+{"level":"error","message":"Error: Invalid old password Invalid old password","stack":"Error: Invalid old password\n    at F:\\Github\\Task Manager\\backend\\src\\controllers\\user.controller.js:52:15","statusCode":400}
+{"level":"error","message":"Error: Invalid old password Invalid old password","stack":"Error: Invalid old password\n    at F:\\Github\\Task Manager\\backend\\src\\controllers\\user.controller.js:52:15","statusCode":400}

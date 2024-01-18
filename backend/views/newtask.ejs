@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/newtask.css">
+    <title>Task Creator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Task</h1>
+        <form id="taskForm" action="">
+            <div class="form-group">
+                <label for="taskName">Task Name</label>
+                <input type="text" id="taskName" name="taskName" required>
+            </div>
+            <div class="form-group">
+                <label for="taskDescription">Task Description</label>
+                <input type="" id="taskDescription" name="taskDescription" required>
+            </div>
+            <button type="submit">Create Task</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const taskName = document.getElementById('taskName').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+
+            // Here, you can handle the task creation, for example, by sending the data to a server.
+
+            // Reset the form
+            document.getElementById('taskForm').reset();
+        });
+    </script>
+</body>
+</html>

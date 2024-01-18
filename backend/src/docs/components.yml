@@ -1,0 +1,27 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        age:
+          type: integer
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    Task:
+      type: object
+      properties:
+        description:
+          type: string
+        completed:
+          type: boolean

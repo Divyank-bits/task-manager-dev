@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/profile.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <div class="user-info">
+            <h2>User Name: <%= user.name %></h2>
+        </div>
+        <div class="tasks">
+            <% if(task===[]) {%> 
+                <div class="task">Create your first task here</div>
+            <% } else {%>
+                <h2>Tasks Created:</h2>
+                <% for(let x in task) {%>
+                    <% var tasknum=(x) %>
+                    <div class="task">Task <%= tasknum%>: <%= task[x].description %></div>
+                <% } %>
+            <% } %>
+             
+        <form method="POST" action="/logout" class="logout">
+            <button id="logoutButton">Logout</button>
+        </form>
+        <form method="POST" action="/logout" class="logout">
+            <button id="logoutButton">Logout</button>
+        </form>
+        <form method="POST" action="/logoutAll" class="logoutAll">
+            <button id="logoutAllButton">Logout All</button>
+        </form>
+    </div>
+    
+</body>
+</html>
+
+    <!-- <script>
+        // Logout button event listener
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            // Handle logout for the current user (e.g., clearing cookies or session data).
+            alert('User logged out');
+        });
+
+        // Logout all button event listener
+        document.getElementById('logoutAllButton').addEventListener('click', () => {
+            // Handle logging out all users (e.g., clearing all sessions or tokens).
+            alert('All users logged out');
+        });
+    </script> -->
+</body>
+</html>

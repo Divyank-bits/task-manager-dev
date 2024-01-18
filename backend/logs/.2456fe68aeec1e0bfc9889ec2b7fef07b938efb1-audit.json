@@ -1,0 +1,60 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs\\.2456fe68aeec1e0bfc9889ec2b7fef07b938efb1-audit.json",
+    "files": [
+        {
+            "date": 1704269209195,
+            "name": "logs\\error-2024-01-03.log",
+            "hash": "f336734d1f6df7716928d70ba16a6f737b4a61e9181aacad077f341054699284"
+        },
+        {
+            "date": 1704691686446,
+            "name": "logs\\error-2024-01-08.log",
+            "hash": "966c493ac752b9c24cc55bb5433bbde8538a3a25d5026baaab90a56c99220714"
+        },
+        {
+            "date": 1704776390317,
+            "name": "logs\\error-2024-01-09.log",
+            "hash": "cc7a51bbf9ba9e551ae99dccac89fa0068924f56c2fb587e6eb5432552febb17"
+        },
+        {
+            "date": 1704827992653,
+            "name": "logs\\error-2024-01-10.log",
+            "hash": "62e24e4468c832e63fbb0651149baaf3abf6cf593bfc7d7cf9cb107869331e1b"
+        },
+        {
+            "date": 1704946181349,
+            "name": "logs\\error-2024-01-11.log",
+            "hash": "96f766bd338fa9505c8458b066bd6358a7ccb1020a3c088b3e5495c19135238a"
+        },
+        {
+            "date": 1705165639167,
+            "name": "logs\\error-2024-01-13.log",
+            "hash": "7f903813e9e2e74a4bf067fd56d95d4cf4445083ee3ed91b1e1e654cae7600e8"
+        },
+        {
+            "date": 1705214560468,
+            "name": "logs\\error-2024-01-14.log",
+            "hash": "b69ec87bfb54a7a222d0446e63191f8f68b795f9ed7034e4360816d7827acfc7"
+        },
+        {
+            "date": 1705258253282,
+            "name": "logs\\error-2024-01-15.log",
+            "hash": "5c486396d594ba0b260b15a98a089105619df76dbcde5c23b8df4771025d774f"
+        },
+        {
+            "date": 1705380885365,
+            "name": "logs\\error-2024-01-16.log",
+            "hash": "7e59757a868f95fa84154513ab5d6c8e56f3bdb1c12444dda8a4597f2f56a0f2"
+        },
+        {
+            "date": 1705460166168,
+            "name": "logs\\error-2024-01-17.log",
+            "hash": "488166d9ea1db5ce97ae4191d068ba2485f3a3f29ad88a09364f3974fc585e3b"
+        }
+    ],
+    "hashType": "sha256"
+}
