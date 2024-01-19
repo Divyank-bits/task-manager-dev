@@ -1,0 +1,3 @@
+{"level":"info","message":"User loggedin"}
+{"level":"error","message":"Error: The divyankvyas00@gmail.com and password did not match our records The divyankvyas00@gmail.com and password did not match our records","stack":"Error: The divyankvyas00@gmail.com and password did not match our records\n    at Object.getUserByCredential (E:\\Task Manager\\task-manager-dev\\backend\\src\\services\\user.service.js:44:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async E:\\Task Manager\\task-manager-dev\\backend\\src\\controllers\\auth.controller.js:93:18","statusCode":400}
+{"level":"info","message":"User loggedin"}

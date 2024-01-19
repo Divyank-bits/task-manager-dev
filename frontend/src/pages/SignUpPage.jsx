@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SignupForm from "../components/UserForm";
 import { useNavigate, Link } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const SignUpPage = () => {
     e.preventDefault();
     // console.log("Form Data:", formData);
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch(`${apiUrl}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {findOne,softdelete} = require('../utils/wrapper')
 const taskService = require('./task.service')
-const ErrorResponse = require('../middleware/errorHandler')
+const ErrorResponse = require('../utils/errorResponse')
 
 const generateToken = async(user)=> {
     const token = jwt.sign({ email: user.email.toString()},'divyank',{

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ChangePasswordForm from "../components/ChangePasswordForm";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     const { newPassword } = formData;
     try {
-      const response = await fetch("http://localhost/reset-password", {
+      const response = await fetch(`${apiUrl}/reset-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

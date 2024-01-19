@@ -3,6 +3,7 @@ import UserProfile from "../components/UserProfile";
 import TaskList from "../components/TaskList";
 import TaskForm from "../components/TaskForm";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -16,7 +17,7 @@ const ProfilePage = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/profile", {
+      const response = await fetch(`${apiUrl}/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +47,7 @@ const ProfilePage = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/tasks", {
+      const response = await fetch(`${apiUrl}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +74,7 @@ const ProfilePage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      const response = await fetch(`${apiUrl}/tasks/${taskId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +100,7 @@ const ProfilePage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      const response = await fetch(`${apiUrl}/tasks/${taskId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +127,7 @@ const ProfilePage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/logout`, {
+      const response = await fetch(`${apiUrl}/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -152,7 +153,7 @@ const ProfilePage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/logoutAll`, {
+      const response = await fetch(`${apiUrl}/logoutAll`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

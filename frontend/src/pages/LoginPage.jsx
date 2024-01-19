@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
+
+
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -9,6 +12,7 @@ const LoginPage = () => {
   });
   const [loginStatus, setLoginStatus] = useState(null); // New state for login status
   const navigate = useNavigate();
+  console.log('API Base URL:', import.meta.env.VITE_REACT_APP_API_BASE_URL);
 
   const handleChange = (e) => {
     setFormData((prevData) => ({
@@ -20,7 +24,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(`${apiUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,8 +46,9 @@ const LoginPage = () => {
       setLoginStatus("Error during login"); // Set the login status for error message
     }
   };
-
+  // console.log(`${apiUrl}/login`)
   return (
+    
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">

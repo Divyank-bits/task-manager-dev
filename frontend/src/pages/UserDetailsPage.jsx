@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UpdateUser from "../components/UpdateUser";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
 
 const UserDetailsPage = () => {
   const [userData, setUserData] = useState(null);
@@ -16,7 +17,7 @@ const UserDetailsPage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/profile`, {
+      const response = await fetch(`${apiUrl}/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +63,7 @@ const UserDetailsPage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/profile`, {
+      const response = await fetch(`${apiUrl}/profile`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +94,7 @@ const UserDetailsPage = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:3000/profile`, {
+      const response = await fetch(`${apiUrl}/profile`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

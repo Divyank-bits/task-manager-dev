@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ChangePasswordForm from "../components/ChangePasswordForm";
 import Alerts from "../components/ChangePasswordAlerts";
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
 
 const ChangePassword = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ const ChangePassword = () => {
       }
 
       const response = await fetch(
-        "http://localhost:3000/profile/changepassword",
+        `${apiUrl}/profile/changepassword`,
         {
           method: "PATCH",
           headers: {
