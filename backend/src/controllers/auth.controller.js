@@ -7,6 +7,7 @@ const { customlogger } = require('../config/errorlogs')
 const  userService  = require('../services/user.service')
 const AuthController = {};
 const responseHandler = require('../utils/errorResponse')
+const sendEmail = require('../utils/sendMailBrevo')
 
 /*
 @desc   Render the login page
@@ -126,5 +127,33 @@ AuthController.logoutAll = asynchandler(async (req, res) => {
     customlogger("User logged out all", req.user);
     res.status(200).send(req.user);
 });
+
+
+AuthController.forgotPassword = asynchandler(async(req,res)=> {
+
+    const {email} = req.body;
+    const user = await userService.findByEmail(email);
+
+    const resetToken = await userService.generateToken(user);
+
+    user.resetToken = resetToken;
+    user.resetTokenExpiration = Date.now() + 3600000; // Token valid for 1 hour
+    await user.save();
+    console.log(user.email)
+
+    const url = `http://localhost:3000/reset-password?email=${user.email}&token=${resetToken}`
+    const emailContent = `Click on the following link to change your password <a href="${url}">${url}</a>`;
+    sendEmail(user.email,"Password Reset",emailContent)
+    res.json({ success: true, message: 'Password reset email sent' });
+
+})
+ AuthController.resetPassword = asynchandler(async(req,res)=> {
+    const { email, newPassword } = req.body;
+    const user = await userService.findByEmail(email);
+
+    user.password = newPassword;
+    await user.save();
+    res.json({ success: true, message: 'Password reset successful' });
+ })
 
 module.exports = AuthController;

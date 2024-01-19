@@ -30,17 +30,24 @@ const createUser = asyncHandler( async (userData) => {
 //         // throw new Error(e);
 //     }
 // })
+const findByEmail = async(email) => {
+    const user = await findOne(User,{email});
+    if(!user) {
+        throw new ErrorResponse(`There is no user with this ${email} in our records`,400)
+    }
+    return user
+}
 const getUserByCredential = async (email, password) => {
     const user = await findOne(User,{email});
     if (!user) {
         // throw new Error('Unable to login');
-        throw new ErrorResponse(`The ${email} and password did not match our records`)
+        throw new ErrorResponse(`The ${email} and password did not match our records`,400)
     }
 
     const match = await bcrypt.compare(password, user.password);
     if (!match){
         // throw new Error('Unable to login');
-        throw new ErrorResponse(`The ${email} and password did not match our records`)
+        throw new ErrorResponse(`The ${email} and password did not match our records`,400)
     } 
     return user;
 };
@@ -96,6 +103,7 @@ module.exports = {
     updateUser,
     deleteUser,
     matchPassword,
+    findByEmail
     // existingUser
 }
 
