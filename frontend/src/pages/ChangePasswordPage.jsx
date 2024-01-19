@@ -94,6 +94,7 @@ const ChangePassword = () => {
                   formData={formData}
                   handleChange={handleChange}
                   handleSubmit={handleSubmit}
+                  forgotflag={true}
                 />
                 <Link to="/profile" className="btn btn-link mt-2">
                   Go back to Profile Page

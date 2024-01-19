@@ -141,7 +141,7 @@ AuthController.forgotPassword = asynchandler(async(req,res)=> {
     await user.save();
     console.log(user.email)
 
-    const url = `http://localhost:3000/reset-password?email=${user.email}&token=${resetToken}`
+    const url = `http://localhost:3000/reset-password/${user.email}/${resetToken}`
     const emailContent = `Click on the following link to change your password <a href="${url}">${url}</a>`;
     sendEmail(user.email,"Password Reset",emailContent)
     res.json({ success: true, message: 'Password reset email sent' });

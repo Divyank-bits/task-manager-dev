@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage'
-import UserDetails from './pages/UserDetailsPage'
-import ProfilePage from './pages/ProfilePage';
-import ChangePassword from './pages/ChangePasswordPage'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import UserDetails from "./pages/UserDetailsPage";
+import ProfilePage from "./pages/ProfilePage";
+import ChangePassword from "./pages/ChangePasswordPage";
+import ForgotPassword from "./pages/ForgotPasswordPage";
+import ResetPassword from "./pages/ResetPasswordPage";
 
 function App() {
   return (
     <>
       <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/profile" element={<ProfilePage />}/>
-        <Route path="/user" element={<UserDetails />}/>
-        <Route path="/password" element={<ChangePassword/>}/>
-      </Routes>
-    </Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/user" element={<UserDetails />} />
+          <Route path="/password" element={<ChangePassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword/>} />
+          <Route path="/reset-password/:email/:token" element={<ResetPassword />} />
+        </Routes>
+      </Router>
     </>
-
-  )
+  );
 }
 
-export default App
-
-
-
+export default App;
 
 // <div>
 //         <a href="https://vitejs.dev" target="_blank">
