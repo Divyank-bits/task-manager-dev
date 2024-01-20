@@ -73,6 +73,10 @@ const LoginPage = () => {
                 New User?{" "}
                 <Link to="/signup" className="text-primary">
                   Sign up here
+                </Link>{" "}
+                |{" "}
+                <Link to="/forgot-password" className="text-primary">
+                  Forgot Password?
                 </Link>
               </p>
             </div>

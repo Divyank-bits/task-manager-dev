@@ -1,73 +1,88 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import ChangePasswordForm from "../components/ChangePasswordForm";
-const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
+
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
-    newPassword: "",
-    confirmPassowrd: "",
+    email: "",
   });
-  const [email, token] = useParams();
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const [alert, setAlert] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     }));
   };
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { newPassword } = formData;
+    e.preventDefault()
     try {
-      const response = await fetch(`${apiUrl}/reset-password`, {
+      const response = await fetch(`${apiUrl}/forgot-password`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json",
         },
-        body: JSON.stringify({ email, newPassword }),
+        body: JSON.stringify(formData),
       });
       if (response.ok) {
-        setMessage("Password reset instructions sent to your email.");
+        setAlert({
+          type: "success",
+          message: "Password reset email sent successfully",
+        });
+        // navigate('/login')
       } else {
         const responseData = await response.json();
-        setError(responseData.message || "Password reset failed.");
+        // console.error("An unexpected error occurred:", error);
+        setAlert({
+          type: "error",
+          message:
+            responseData.message || "Failed to send password reset email",
+        });
       }
-    } catch (error) {
-      console.error("An unexpected error occurred:", error);
-      setError("An unexpected error occurred. Please try again.");
+    } catch (e) {
+      // console.error("An unexpected error occurred:", error);
+      setAlert({
+        type: "error",
+        message: "An unexpected error occurred. Please try again.",
+      });
     }
   };
   return (
     <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h2 className="text-center mb-4">Forgot Password</h2>
-              {error && (
-                <div className="alert alert-danger" role="alert">
-                  {error}
-                </div>
-              )}
-              {message && (
-                <div className="alert alert-success" role="alert">
-                  {message}
-                </div>
-              )}
-              <ChangePasswordForm
-                formData={formData}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                forgotflag={false}
-              />
-              <div className="mt-3">
-                <Link to="/login">Back to Login</Link>
+      <div className="row justify-content-center ">
+        <div className="card col-md-6">
+          <div className="card-body">
+            <h2 className="text-center mb-4">Forgot Password</h2>
+            {alert && (
+              <div className={`alert alert-${alert.type}`} role="alert">
+                {alert.message}
               </div>
+            )}
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary btn-block">
+                Reset Password
+              </button>
+            </form>
+            <div className="mt-3">
+              <Link to="/login">Go back to Login</Link>
             </div>
           </div>
         </div>
