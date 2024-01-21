@@ -7,24 +7,35 @@ const ChangePasswordForm = ({
   forgotflag,
 }) => {
   const [validationError, setValidationError] = useState({
-    isCurrentPasswaordValid: true,
-    isNewPasswordValid: true,
+    isCurrentPasswordValid: true,
+    isNewPasswordDifferent: true,
+    isNewPasswordLengthValid: true,
     isConfirmPasswordValid: true,
   });
-  
-  const validationForm = ()=> {
+
+  const validationForm = () => {
     const error = {
-      isCurrentPasswaordValid: formData.currentPassword.length>6,
-      isNewPasswordValid:  (formData.currentPassword!==formData.newPassword),
-      isConfirmPasswordValid:  (formData.newPassword===formData.confirmPassword),
-      isLengthValid: formData.newPassword.length>6 
-    }
+      isCurrentPasswordValid: !forgotflag || (formData.currentPassword.length > 6),
+      isNewPasswordDifferent: formData.currentPassword !== formData.newPassword,
+      isNewPasswordLengthValid: formData.newPassword.length >= 7,
+      isConfirmPasswordValid: formData.newPassword === formData.confirmPassword,
+    };
+
     setValidationError(error);
-    return Object.values(error).every((isValid)=>isValid)
-  }
+    return Object.values(error).every((isValid) => isValid);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (validationForm()) {
+      handleSubmit(e);
+    } else {
+      console.log('Validation Error');
+    }
+  };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={handleFormSubmit}>
       {forgotflag && (
         <div className="mb-3">
           <label htmlFor="currentPassword" className="form-label">
@@ -32,16 +43,15 @@ const ChangePasswordForm = ({
           </label>
           <input
             type="password"
-            className={`form-control ${validationError.isCurrentPasswaordValid?'':'is-invalid'} `}
+            className={`form-control ${validationError.isCurrentPasswordValid ? '' : 'is-invalid'}`}
             id="currentPassword"
             name="currentPassword"
             value={formData.currentPassword}
             onChange={handleChange}
-            required
           />
-          {!validationError.isCurrentPasswaordValid && (
-          <div className="invalid-feedback">Current Password is invalid</div>
-        )}
+          {!validationError.isCurrentPasswordValid && (
+            <div className="invalid-feedback">Current Password is invalid</div>
+          )}
         </div>
       )}
       <div className="mb-3">
@@ -50,35 +60,38 @@ const ChangePasswordForm = ({
         </label>
         <input
           type="password"
-          className={`form-control ${validationError.isNewPasswordValid || validationError.isLengthValid ?'':'is-invalid'} `}
+          className={`form-control ${
+            validationError.isNewPasswordDifferent && validationError.isNewPasswordLengthValid
+              ? ''
+              : 'is-invalid'
+          }`}
           id="newPassword"
           name="newPassword"
           value={formData.newPassword}
           onChange={handleChange}
-          required
         />
-        {!validationError.isNewPasswordValid && (
-          <div className="invalid-feedback"> New Password should be different from Old Password</div>
+        {!validationError.isNewPasswordDifferent && (
+          <div className="invalid-feedback">New Password should be different from Old Password</div>
         )}
-        {!validationError.isLengthValid && (
-          <div className="invalid-feedback">Password length should be minimum 7 </div>
+        {!validationError.isNewPasswordLengthValid && (
+          <div className="invalid-feedback">Password length should be minimum 7</div>
         )}
       </div>
+
       <div className="mb-3">
         <label htmlFor="confirmPassword" className="form-label">
           Confirm New Password:
         </label>
         <input
           type="password"
-          className={`form-control ${validationError.isConfirmPasswordValid?'':'is-invalid'} `}
+          className={`form-control ${validationError.isConfirmPasswordValid ? '' : 'is-invalid'}`}
           id="confirmPassword"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleChange}
-          required
         />
         {!validationError.isConfirmPasswordValid && (
-          <div className="invalid-feedback"> Both Password should be same</div>
+          <div className="invalid-feedback">Both Passwords should match</div>
         )}
       </div>
       <button type="submit" className="btn btn-primary btn-block">

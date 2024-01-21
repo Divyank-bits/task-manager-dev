@@ -86,11 +86,11 @@ const ChangePassword = () => {
             <div className="card">
               <div className="card-body">
                 <h2 className="text-center mb-4">Change Password</h2>
-                <Alerts
+                {/* <Alerts
                   currentPasswordMatch={currentPasswordMatch}
                   passwordsMatch={passwordsMatch}
                   passwordLengthValid={passwordLengthValid}
-                />
+                /> */}
                 <ChangePasswordForm
                   formData={formData}
                   handleChange={handleChange}

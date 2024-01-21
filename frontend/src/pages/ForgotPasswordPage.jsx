@@ -36,17 +36,18 @@ const ForgotPassword = () => {
         // navigate('/login')
       } else {
         const responseData = await response.json();
+        console.log(responseData)
         // console.error("An unexpected error occurred:", error);
         setAlert({
-          type: "error",
+          type: "danger",
           message:
-            responseData.message || "Failed to send password reset email",
+            responseData.error || "Failed to send password reset email",
         });
       }
     } catch (e) {
       // console.error("An unexpected error occurred:", error);
       setAlert({
-        type: "error",
+        type: "danger",
         message: "An unexpected error occurred. Please try again.",
       });
     }
