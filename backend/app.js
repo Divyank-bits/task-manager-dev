@@ -17,7 +17,11 @@ const errorHandler = require('./src/middleware/errorHandler')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+require('dotenv').config();
+
+
 const app = express();
+const serverUrl = process.env.SERVER_URL;
 const port = process.env.PORT || 3000
 
 
@@ -26,7 +30,6 @@ app.set('views', path.join(__dirname, '/views'))
 
 app.use(bodyParser.json());
 app.use(cors());
-
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 app.use(express.json())
@@ -49,7 +52,7 @@ app.use(taskroute);
 app.use(errorLoggerMiddleware)
 app.use(errorHandler);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Listening on port ' + port)
 })
 

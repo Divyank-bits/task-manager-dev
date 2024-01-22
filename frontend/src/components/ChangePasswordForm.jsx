@@ -13,6 +13,8 @@ const ChangePasswordForm = ({
     isConfirmPasswordValid: true,
   });
 
+  const [newPasswordError, setNewPasswordError] = useState(null);
+
   const validationForm = () => {
     const error = {
       isCurrentPasswordValid: !forgotflag || (formData.currentPassword.length > 6),
@@ -22,6 +24,16 @@ const ChangePasswordForm = ({
     };
 
     setValidationError(error);
+
+    // Determine which specific error to display for the New Password
+    if (!error.isNewPasswordDifferent) {
+      setNewPasswordError("New Password should be different from Old Password");
+    } else if (!error.isNewPasswordLengthValid) {
+      setNewPasswordError("Password length should be minimum 7");
+    } else {
+      setNewPasswordError(null); // Reset to null if no specific error
+    }
+
     return Object.values(error).every((isValid) => isValid);
   };
 
@@ -61,20 +73,15 @@ const ChangePasswordForm = ({
         <input
           type="password"
           className={`form-control ${
-            validationError.isNewPasswordDifferent && validationError.isNewPasswordLengthValid
-              ? ''
-              : 'is-invalid'
+            newPasswordError ? 'is-invalid' : ''
           }`}
           id="newPassword"
           name="newPassword"
           value={formData.newPassword}
           onChange={handleChange}
         />
-        {!validationError.isNewPasswordDifferent && (
-          <div className="invalid-feedback">New Password should be different from Old Password</div>
-        )}
-        {!validationError.isNewPasswordLengthValid && (
-          <div className="invalid-feedback">Password length should be minimum 7</div>
+        {newPasswordError && (
+          <div className="invalid-feedback">{newPasswordError}</div>
         )}
       </div>
 
