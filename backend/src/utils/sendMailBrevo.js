@@ -4,7 +4,7 @@ const transporter = nodemailer.createTransport({
     host: 'smtp-relay.sendinblue.com',
     auth: {
         user: 'divyank.vyas.dev@gmail.com',
-        pass: 'IM18BTxFyv4wKAP9'
+        pass: 'GwzZDhJBbpC06XA8'
     },
     secure: false // Use 'true' for TLS-secured connection
 });

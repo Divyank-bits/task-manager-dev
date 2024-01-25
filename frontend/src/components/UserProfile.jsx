@@ -3,14 +3,9 @@ import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 import { Link } from "react-router-dom";
 
-const UserProfile = ({
-  userData,
-  onAddTask,
-  onDeleteTask,
-  onUpdateTask,
-  onLogout,
-  onLogoutAll,
-}) => {
+const UserProfile = (props) => {
+  const {userData, onAddTask, onDeleteTask, onUpdateTask, onLogout, onLogoutAll} = props;
+  
   return (
     <div className="container mt-5">
       <div className="card p-4 rounded shadow">
