@@ -78,6 +78,8 @@ const LoginPage = () => {
                 <Link to="/forgot-password" className="text-primary">
                   Forgot Password?
                 </Link>
+                <button onclick="gapi.auth2.getAuthInstance().signIn()">Sign in with Google</button>
+
               </p>
             </div>
           </div>

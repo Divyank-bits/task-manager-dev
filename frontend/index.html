@@ -7,6 +7,15 @@
     <title>Task Manager</title>
   </head>
   <body>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script>
+      gapi.load('auth2', function() {
+        gapi.auth2.init({
+          client_id: '17417277768-qugsubm7gl1i30a2levm9etthqrbpmmm.apps.googleusercontent.com'
+        });
+      });
+    </script>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
