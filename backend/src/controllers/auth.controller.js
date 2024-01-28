@@ -5,7 +5,7 @@ const asynchandler = require("../utils/catchasync");
 const { customlogger } = require("../config/errorlogs-config");
 const userService = require("../services/user.service");
 const responseHandler = require("../utils/errorResponse");
-const sendEmail = require("../config/sendMailBrevo");
+const sendEmail = require("../private/sendMailBrevo");
 const asyncHandler = require("../utils/catchasync");
 const passport = require("../config/passport-config");
 const ErrorResponse = require("../utils/errorResponse");
@@ -83,7 +83,7 @@ AuthController.login = asynchandler(async (req, res, next) => {
       "any.required": "Password is required",
     }),
   }).required();
-  const { error } = userschema.validate(req.body);
+  const { error } = loginschema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     new ErrorResponse(msg, 400);
@@ -111,7 +111,7 @@ AuthController.passportlogin = asyncHandler(async (req, res, next) => {
       "any.required": "Password is required",
     }),
   }).required();
-  const { error } = userschema.validate(req.body);
+  const { error } = loginschema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     new ErrorResponse(msg, 400);

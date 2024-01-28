@@ -7,7 +7,7 @@ const userService = require("../services/user.service");
 const taskService = require("../services/task.service");
 const ErrorResponse = require("../utils/errorResponse");
 const sendPasswordChangeEmail = require("../utils/sendEmail");
-const sendEmailBrevo = require("../config/sendMailBrevo");
+const sendEmailBrevo = require("../private/sendMailBrevo");
 
 const UserController = {};
 

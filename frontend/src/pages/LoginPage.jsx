@@ -36,7 +36,7 @@ const LoginPage = () => {
         console.log("Login successful");
         const data = await response.json();
         localStorage.setItem("jwtToken", data.token);
-        navigate("/");
+        navigate("/profile");
       } else {
         console.error("Login Failed");
         setLoginStatus("Incorrect credentials"); // Set the login status for error message
