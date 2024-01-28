@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
+import { GoogleLogin } from "react-google-login";
+// import googleConfig from "../../../backend/src/private/google-config";
 
-const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL
-
+const apiUrl = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const LoginPage = () => {
   });
   const [loginStatus, setLoginStatus] = useState(null); // New state for login status
   const navigate = useNavigate();
-  console.log('API Base URL:', import.meta.env.VITE_REACT_APP_API_BASE_URL);
+  // console.log("API Base URL:", import.meta.env.VITE_REACT_APP_API_BASE_URL);
 
   const handleChange = (e) => {
     setFormData((prevData) => ({
@@ -46,9 +47,33 @@ const LoginPage = () => {
       setLoginStatus("Error during login"); // Set the login status for error message
     }
   };
+
+  const handleGoogleResponse = async (response) => {
+    try {
+      const googleResponse = await fetch(`${apiUrl} `, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ googleToken: response.tokenId }),
+      });
+
+      if (googleResponse.ok) {
+        console.log("Google login successful");
+        const data = await googleResponse.json();
+        localStorage.setItem("jwtToken", data.token);
+        navigate("/profile");
+      } else {
+        console.error("Google Login Failed");
+        setLoginStatus("Google login failed");
+      }
+    } catch (error) {
+      console.error("Error during Google Login", error);
+      setLoginStatus("Error during Google login");
+    }
+  };
   // console.log(`${apiUrl}/login`)
   return (
-    
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
@@ -67,6 +92,13 @@ const LoginPage = () => {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
               />
+              <GoogleLogin
+                clientId=""
+                buttonText="Login with Google"
+                onSuccess={handleGoogleResponse}
+                onFailure={handleGoogleResponse}
+                cookiePolicy={"single_host_origin"}
+              />
             </div>
             <div className="card-footer text-center">
               <p className="mb-0">
@@ -78,8 +110,7 @@ const LoginPage = () => {
                 <Link to="/forgot-password" className="text-primary">
                   Forgot Password?
                 </Link>
-                <button onclick="gapi.auth2.getAuthInstance().signIn()">Sign in with Google</button>
-
+               
               </p>
             </div>
           </div>

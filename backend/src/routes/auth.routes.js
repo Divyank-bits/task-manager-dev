@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const auth = require("../middleware/auth.header");
 const AuthController = require("../controllers/auth.controller");
+const passport = require("../config/passport-config");
 
 router
   .route("/login")
@@ -12,6 +13,16 @@ router
   .route("/signup")
   .get(AuthController.showSignup)
   .post(AuthController.signup);
+
+router.post(
+  "/",
+  passport.authenticate("google")
+);
+router.get(
+  "/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  AuthController.googleLogin
+);
 
 router.post("/logout", auth, AuthController.logout);
 

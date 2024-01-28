@@ -5,12 +5,23 @@ const asynchandler = require("../utils/catchasync");
 const { customlogger } = require("../config/errorlogs-config");
 const userService = require("../services/user.service");
 const responseHandler = require("../utils/errorResponse");
-const sendEmail = require("../private/sendMailBrevo");
+const sendEmail = require("../utils/sendMailBrevo");
 const asyncHandler = require("../utils/catchasync");
 const passport = require("../config/passport-config");
 const ErrorResponse = require("../utils/errorResponse");
 
 const AuthController = {};
+
+
+AuthController.googleLogin = (req,res)=>{
+  try {
+    const { user, token } = req.user; // Assuming req.user contains the user and token information
+    res.json({ user, token });
+  } catch (error) {
+    new ErrorResponse('Internal Server Error',500)
+  }
+} 
+
 /*
 @desc   Render the login page
 @route  GET /api/v1/auth/login
