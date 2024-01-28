@@ -2,15 +2,15 @@ const Task = require("../model/task");
 const User = require("../model/user");
 const Joi = require("joi");
 const asynchandler = require("../utils/catchasync");
-const { customlogger } = require("../config/errorlogs");
+const { customlogger } = require("../config/errorlogs-config");
 const userService = require("../services/user.service");
 const responseHandler = require("../utils/errorResponse");
 const sendEmail = require("../config/sendMailBrevo");
 const asyncHandler = require("../utils/catchasync");
-const passport = require("passport");
+const passport = require("../config/passport-config");
 const ErrorResponse = require("../utils/errorResponse");
 
-const AuthController={}
+const AuthController = {};
 /*
 @desc   Render the login page
 @route  GET /api/v1/auth/login
@@ -116,12 +116,15 @@ AuthController.passportlogin = asyncHandler(async (req, res, next) => {
     const msg = error.details.map((el) => el.message).join(",");
     new ErrorResponse(msg, 400);
   }
-  passport.authenticate(
-    "local",
-    asyncHandler(async (err, user, info) => {
-      if (err) return next(err);
-    })
-  );
+  passport.authenticate("local", async (err, user, info) => {
+      if (err) 
+        return next(err);
+      if(!user) {
+        throw new ErrorResponse(info.message,401);
+      }
+      const token = await userService.generateToken(user);
+      res.json({user,token});
+    })(req,res,next);
 });
 
 /*

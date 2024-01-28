@@ -3,7 +3,10 @@ const router = new express.Router();
 const auth = require("../middleware/auth.header");
 const AuthController = require("../controllers/auth.controller");
 
-router.route("/login").get(AuthController.showLogin).post(AuthController.login);
+router
+  .route("/login")
+  .get(AuthController.showLogin)
+  .post(AuthController.passportlogin);
 
 router
   .route("/signup")
