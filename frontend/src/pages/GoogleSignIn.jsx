@@ -47,8 +47,14 @@ function SignIn() {
     try {
       const data = await signInWithPopup(auth,provider);
       const email= data.user.email;
+      const name = data.user.displayName;
+      const dataToSend = {name,email}
+      console.log(dataToSend)
+      navigate('/new-password?data=' + encodeURIComponent(JSON.stringify(dataToSend)));
+      // navigate(`/new-password?name=${name}&email=${email}`)
 
-      
+
+
     } catch(e) {
 
     }
@@ -63,7 +69,7 @@ function SignIn() {
       {value ? (
         "/login"
       ) : (
-        <button onClick={handleSignIn}>Sign in with Google</button>
+        <button onClick={handleSignUpGoogle}>Sign in with Google</button>
       )}
     </div>
   );

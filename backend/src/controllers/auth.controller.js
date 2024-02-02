@@ -25,6 +25,9 @@ AuthController.googleLogin = async (req,res)=>{
     res.json({ user, token });
 } 
 
+AuthController.googleSignup = async (req,res) => {
+  
+}
 /*
 @desc   Render the login page
 @route  GET /api/v1/auth/login
@@ -68,6 +71,7 @@ AuthController.signup = asynchandler(async (req, res) => {
       "any.required": "Password is required",
     }),
   }).required();
+  // console.log(req.body);
   const { error } = userschema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");

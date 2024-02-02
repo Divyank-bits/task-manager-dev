@@ -12,6 +12,8 @@ import ChangePassword from "./pages/ChangePasswordPage";
 import ForgotPassword from "./pages/ForgotPasswordPage";
 import ResetPassword from "./pages/ResetPasswordPage";
 import GLogin from "./pages/GoogleSignIn"
+import NewPassword from "./pages/NewPasswordPage";
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword/>} />
           <Route path="/reset-password/:email/:token" element={<ResetPassword />} />
           <Route path="/glogin" element={<GLogin/>} />
+          <Route path="/new-password" element={<NewPassword />} />
         </Routes>
       </Router>
     </>

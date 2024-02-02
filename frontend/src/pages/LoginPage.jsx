@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import { auth, provider } from "../../../private/firebase-config";
 import { signInWithPopup } from "firebase/auth";
-import googlebutton from '../assets/web_light_rd_SI@1x.png'
+import googlebutton from '../assets/Google_Logo/web_light_sq_SI@1x.png'
 // import { GoogleLogin } from "react-google-login";
 // import googleConfig from "../../../backend/src/private/google-config";
 
@@ -16,6 +16,7 @@ const LoginPage = () => {
   });
   const [loginStatus, setLoginStatus] = useState(null); // New state for login status
   const navigate = useNavigate();
+  
   // console.log("API Base URL:", import.meta.env.VITE_REACT_APP_API_BASE_URL);
 
   const handleChange = (e) => {
@@ -53,7 +54,9 @@ const LoginPage = () => {
 
   const handleSignInGoogle = async (e) => {
     try {
+      // e.preventDefault()
       const result = await signInWithPopup(auth, provider);
+      console.log(result);
       const email = result.user.email;
       const response = await fetch(`${apiUrl}/googlelogin`, {
         method: "POST",
