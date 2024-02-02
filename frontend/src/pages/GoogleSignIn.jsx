@@ -43,6 +43,17 @@ function SignIn() {
     }
   };
 
+  const handleSignUpGoogle = async (e)=> {
+    try {
+      const data = await signInWithPopup(auth,provider);
+      const email= data.user.email;
+
+      
+    } catch(e) {
+
+    }
+  }
+
   useEffect(() => {
     // setValue(localStorage.getItem("email"));
   }, []);

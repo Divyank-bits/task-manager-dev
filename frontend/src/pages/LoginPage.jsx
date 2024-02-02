@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
-import { auth, provider } from "../firebase-config";
+import { auth, provider } from "../../../private/firebase-config";
 import { signInWithPopup } from "firebase/auth";
+import googlebutton from '../assets/web_light_rd_SI@1x.png'
 // import { GoogleLogin } from "react-google-login";
 // import googleConfig from "../../../backend/src/private/google-config";
 
@@ -50,7 +51,30 @@ const LoginPage = () => {
     }
   };
 
-
+  const handleSignInGoogle = async (e) => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const email = result.user.email;
+      const response = await fetch(`${apiUrl}/googlelogin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("jwtToken", data.token);
+        navigate("/profile");
+      } else {
+        console.error("Login Failed");
+        setLoginStatus("Incorrect credentials"); // Set the login status for error message
+      }
+    } catch (error) {
+      console.error("Error during Login", error);
+      setLoginStatus("Error during login"); // Set the login status for error message
+    }
+  };
   // console.log(`${apiUrl}/login`)
   return (
     <div className="container mt-5">
@@ -71,6 +95,7 @@ const LoginPage = () => {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
               />
+              <button className="btn mt-2 ps-0" onClick={handleSignInGoogle}><img src={googlebutton} alt="" /> </button>
             </div>
             <div className="card-footer text-center">
               <p className="mb-0">
