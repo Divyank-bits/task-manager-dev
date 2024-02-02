@@ -14,15 +14,7 @@ router
   .get(AuthController.showSignup)
   .post(AuthController.signup);
 
-router.post(
-  "/",
-  passport.authenticate("google")
-);
-router.get(
-  "/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  AuthController.googleLogin
-);
+router.post('/googlelogin', AuthController.googleLogin)
 
 router.post("/logout", auth, AuthController.logout);
 

@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ChangePassword from "./pages/ChangePasswordPage";
 import ForgotPassword from "./pages/ForgotPasswordPage";
 import ResetPassword from "./pages/ResetPasswordPage";
+import GLogin from "./pages/GoogleSignIn"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/password" element={<ChangePassword />} />
           <Route path="/forgot-password" element={<ForgotPassword/>} />
           <Route path="/reset-password/:email/:token" element={<ResetPassword />} />
+          <Route path="/glogin" element={<GLogin/>} />
         </Routes>
       </Router>
     </>

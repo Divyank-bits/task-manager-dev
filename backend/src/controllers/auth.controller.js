@@ -13,13 +13,16 @@ const ErrorResponse = require("../utils/errorResponse");
 const AuthController = {};
 
 
-AuthController.googleLogin = (req,res)=>{
-  try {
-    const { user, token } = req.user; // Assuming req.user contains the user and token information
+AuthController.googleLogin = async (req,res)=>{
+
+    console.log(req.body);
+    const user = await userService.findByEmail(req.body.email);
+    if(!user) {
+      new ErrorResponse(`No user found with this ${req.body.email} address`,400)
+    }
+    const token = await userService.generateToken(user);
+    customlogger("User loggedin using Google", user);
     res.json({ user, token });
-  } catch (error) {
-    new ErrorResponse('Internal Server Error',500)
-  }
 } 
 
 /*
